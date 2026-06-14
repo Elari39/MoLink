@@ -172,15 +172,26 @@ export function IconCustom(props: IconProps) {
 }
 
 /**
- * 墨链 Logo：圆相（禅圆）笔触，象征水墨「一笔成环」。
+ * 墨链 Logo：太极（阴阳）图，象征链接的往复与平衡。
+ * 黑区取 currentColor（随主题墨色），白区以 mask 镂空透出背景，
+ * 鱼眼按太极阴阳反色，从而在任意背景下均无色差。
  */
 export function LogoMark(props: IconProps) {
   return (
-    <svg viewBox="0 0 48 48" fill="none" {...props}>
-      <path
-        d="M24 5C13.5 5 5 13.5 5 24s8.5 19 19 19c7.5 0 14-4.4 17-10.7-3.4 4.6-8.9 7.6-15 7.6C15.7 39.9 9 33.2 9 25 9 16.8 15.7 10 24 10c4.3 0 8.2 1.8 11 4.8C32.3 9.1 28.5 5 24 5Z"
-        fill="currentColor"
-      />
+    <svg viewBox="0 0 64 64" fill="none" {...props}>
+      <defs>
+        <mask id="logo-taiji">
+          <rect width="64" height="64" fill="white" />
+          {/* 白色半区 → 镂空（透出背景） */}
+          <path d="M32,2 A30,30 0 0,1 32,62 A15,15 0 0,1 32,32 A15,15 0 0,0 32,2 Z" fill="black" />
+          {/* 黑区里的白鱼眼 → 镂空 */}
+          <circle cx="32" cy="17" r="5" fill="black" />
+        </mask>
+      </defs>
+      {/* 黑底整圆（currentColor），mask 镂出白区与白鱼眼 */}
+      <circle cx="32" cy="32" r="30" fill="currentColor" mask="url(#logo-taiji)" />
+      {/* 白区里的黑鱼眼（currentColor，独立于 mask） */}
+      <circle cx="32" cy="47" r="5" fill="currentColor" />
     </svg>
   )
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
+import shortlink.elari39.github.config.PublicBaseUrlResolver;
 import shortlink.elari39.github.dto.ApiResult;
 import shortlink.elari39.github.dto.CreateLinkRequest;
 import shortlink.elari39.github.dto.LinkResponse;
@@ -24,9 +26,11 @@ import shortlink.elari39.github.service.ShortLinkService;
 public class ShortLinkController {
 
     private final ShortLinkService shortLinkService;
+    private final PublicBaseUrlResolver publicBaseUrlResolver;
 
-    public ShortLinkController(ShortLinkService shortLinkService) {
+    public ShortLinkController(ShortLinkService shortLinkService, PublicBaseUrlResolver publicBaseUrlResolver) {
         this.shortLinkService = shortLinkService;
+        this.publicBaseUrlResolver = publicBaseUrlResolver;
     }
 
     /**
@@ -36,8 +40,10 @@ public class ShortLinkController {
      * @return 统一包装的创建结果
      */
     @PostMapping
-    public ApiResult<LinkResponse> create(@Valid @RequestBody CreateLinkRequest request) {
-        return ApiResult.ok(shortLinkService.createShortLink(request));
+    public ApiResult<LinkResponse> create(@Valid @RequestBody CreateLinkRequest request,
+                                          HttpServletRequest httpRequest) {
+        return ApiResult.ok(shortLinkService.createShortLink(
+                request, publicBaseUrlResolver.resolve(httpRequest)));
     }
 
     /**
@@ -50,7 +56,9 @@ public class ShortLinkController {
     @GetMapping("/{code}/stats")
     public ApiResult<LinkStatsResponse> stats(
             @PathVariable String code,
-            @RequestParam(defaultValue = "20") int logLimit) {
-        return ApiResult.ok(shortLinkService.getStats(code, logLimit));
+            @RequestParam(defaultValue = "20") int logLimit,
+            HttpServletRequest request) {
+        return ApiResult.ok(shortLinkService.getStats(
+                code, logLimit, publicBaseUrlResolver.resolve(request)));
     }
 }

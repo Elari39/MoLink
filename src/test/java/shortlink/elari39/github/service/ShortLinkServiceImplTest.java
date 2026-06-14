@@ -72,7 +72,7 @@ class ShortLinkServiceImplTest {
         when(shortLinkRepository.save(any(ShortLink.class))).thenAnswer(inv -> inv.getArgument(0));
 
         CreateLinkRequest req = new CreateLinkRequest("https://example.com/page", null, null);
-        LinkResponse resp = service.createShortLink(req);
+        LinkResponse resp = service.createShortLink(req, "https://shorten.miku831.fun");
 
         assertEquals(Base62.encode(100000L), resp.code());
         assertFalse(resp.custom());
@@ -85,7 +85,7 @@ class ShortLinkServiceImplTest {
         when(shortLinkRepository.save(any(ShortLink.class))).thenAnswer(inv -> inv.getArgument(0));
 
         CreateLinkRequest req = new CreateLinkRequest("https://example.com", "mylink", null);
-        LinkResponse resp = service.createShortLink(req);
+        LinkResponse resp = service.createShortLink(req, "https://shorten.miku831.fun");
 
         assertEquals("mylink", resp.code());
         assertEquals(true, resp.custom());
@@ -96,14 +96,16 @@ class ShortLinkServiceImplTest {
         when(shortLinkRepository.existsByCode("taken")).thenReturn(true);
 
         CreateLinkRequest req = new CreateLinkRequest("https://example.com", "taken", null);
-        assertThrows(CodeConflictException.class, () -> service.createShortLink(req));
+        assertThrows(CodeConflictException.class,
+                () -> service.createShortLink(req, "https://shorten.miku831.fun"));
     }
 
     @Test
     void createWithTooShortCustomCodeThrows() {
         // 长度 2 < codeMinLength(4)
         CreateLinkRequest req = new CreateLinkRequest("https://example.com", "ab", null);
-        assertThrows(IllegalArgumentException.class, () -> service.createShortLink(req));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.createShortLink(req, "https://shorten.miku831.fun"));
     }
 
     @Test
@@ -146,7 +148,7 @@ class ShortLinkServiceImplTest {
         when(accessLogRepository.findByCode(eq("abc"), any(Pageable.class)))
                 .thenReturn(Page.<AccessLog>empty());
 
-        LinkStatsResponse stats = service.getStats("abc", 20);
+        LinkStatsResponse stats = service.getStats("abc", 20, "https://shorten.miku831.fun");
 
         assertEquals(8L, stats.totalClicks());
         assertEquals("abc", stats.code());
@@ -155,7 +157,9 @@ class ShortLinkServiceImplTest {
 
     @Test
     void getStatsWithInvalidLogLimitThrows() {
-        assertThrows(IllegalArgumentException.class, () -> service.getStats("abc", 0));
-        assertThrows(IllegalArgumentException.class, () -> service.getStats("abc", 101));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.getStats("abc", 0, "https://shorten.miku831.fun"));
+        assertThrows(IllegalArgumentException.class,
+                () -> service.getStats("abc", 101, "https://shorten.miku831.fun"));
     }
 }

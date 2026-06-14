@@ -13,7 +13,7 @@ services:
       APP_REDIS_ADDR: ${APP_REDIS_ADDR}
       APP_REDIS_PASSWORD: ${APP_REDIS_PASSWORD:-}
       APP_REDIS_DB: ${APP_REDIS_DB:-0}
-      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:8763}
+      APP_BASE_URL: ${APP_BASE_URL:-}
       MYSQL_HOST: ${MYSQL_HOST:-localhost}
       MYSQL_PORT: ${MYSQL_PORT:-3306}
       MYSQL_DB: ${MYSQL_DB:-shortlink}

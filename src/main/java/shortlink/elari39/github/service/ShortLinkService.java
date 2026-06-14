@@ -12,10 +12,11 @@ public interface ShortLinkService {
     /**
      * 创建短链。
      *
-     * @param request 创建请求（含原始链接、可选自定义短码与过期时间）
+     * @param request       创建请求（含原始链接、可选自定义短码与过期时间）
+     * @param publicBaseUrl 生成短链时使用的公网访问地址
      * @return 创建结果
      */
-    LinkResponse createShortLink(CreateLinkRequest request);
+    LinkResponse createShortLink(CreateLinkRequest request, String publicBaseUrl);
 
     /**
      * 根据短码解析原始链接（供跳转使用）。
@@ -32,9 +33,10 @@ public interface ShortLinkService {
     /**
      * 查询短码统计信息。
      *
-     * @param code     短码
-     * @param logLimit 返回的最近访问明细条数
+     * @param code          短码
+     * @param logLimit      返回的最近访问明细条数
+     * @param publicBaseUrl 生成统计响应中短链时使用的公网访问地址
      * @return 统计结果
      */
-    LinkStatsResponse getStats(String code, int logLimit);
+    LinkStatsResponse getStats(String code, int logLimit, String publicBaseUrl);
 }

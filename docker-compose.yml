@@ -45,8 +45,8 @@ services:
       MYSQL_PASSWORD: root
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      # 短链对外域名；1Panel/生产部署时建议覆盖为真实域名或公网 IP
-      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:8763}
+      # 短链对外域名；留空时根据请求头自动识别
+      APP_BASE_URL: ${APP_BASE_URL:-}
     depends_on:
       mysql:
         condition: service_healthy

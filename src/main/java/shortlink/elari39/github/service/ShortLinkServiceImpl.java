@@ -62,7 +62,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
 
     @Override
     @Transactional
-    public LinkResponse createShortLink(CreateLinkRequest request) {
+    public LinkResponse createShortLink(CreateLinkRequest request, String publicBaseUrl) {
         String code;
         boolean custom;
 
@@ -93,7 +93,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
         }
 
         cacheUrl(link);
-        return LinkResponse.of(link, properties.baseUrl());
+        return LinkResponse.of(link, publicBaseUrl);
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
 
     @Override
     @Transactional(readOnly = true)
-    public LinkStatsResponse getStats(String code, int logLimit) {
+    public LinkStatsResponse getStats(String code, int logLimit, String publicBaseUrl) {
         if (logLimit < MIN_LOG_LIMIT || logLimit > MAX_LOG_LIMIT) {
             throw new IllegalArgumentException(
                     "访问明细条数需在 " + MIN_LOG_LIMIT + "~" + MAX_LOG_LIMIT + " 之间");
@@ -144,7 +144,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
                         logEntry.getAccessTime()))
                 .getContent();
 
-        String shortUrl = buildShortUrl(code);
+        String shortUrl = buildShortUrl(publicBaseUrl, code);
         return new LinkStatsResponse(
                 code,
                 shortUrl,
@@ -185,8 +185,7 @@ public class ShortLinkServiceImpl implements ShortLinkService {
     }
 
     /** 拼接完整短链。 */
-    private String buildShortUrl(String code) {
-        String baseUrl = properties.baseUrl();
+    private String buildShortUrl(String baseUrl, String code) {
         return baseUrl.endsWith("/") ? baseUrl + code : baseUrl + "/" + code;
     }
 }

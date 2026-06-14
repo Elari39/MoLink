@@ -1,35 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <title>Notes of Ashen</title>
-  <defs>
-    <radialGradient id="paper" cx="30%" cy="24%" r="76%">
-      <stop offset="0" stop-color="#fffaf0" />
-      <stop offset="0.72" stop-color="#f0e6d4" />
-      <stop offset="1" stop-color="#d8c9b1" />
-    </radialGradient>
-    <filter id="ink" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
-      <feColorMatrix in="noise" type="saturate" values="0" result="grain-gray" />
-      <feComponentTransfer in="grain-gray" result="grain">
-        <feFuncA type="table" tableValues="0 0.16" />
-      </feComponentTransfer>
-      <feBlend in="SourceGraphic" in2="grain" mode="multiply" />
-    </filter>
-  </defs>
-  <circle cx="32" cy="32" r="30" fill="url(#paper)" />
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#1f201d" stroke-width="2.4" />
-  <path
-    d="M32 3a29 29 0 1 1 0 58 14.5 14.5 0 1 1 0-29 14.5 14.5 0 1 0 0-29Z"
-    fill="#1f201d"
-    filter="url(#ink)"
-  />
-  <circle cx="32" cy="17.5" r="5" fill="#efe4d1" />
-  <circle cx="32" cy="46.5" r="5" fill="#1f201d" />
-  <path
-    d="M12.8 45.5c4.4 7.3 11.5 11 19.2 11 10 0 18.5-6.7 21.1-15.8"
-    fill="none"
-    stroke="#8f2f26"
-    stroke-linecap="round"
-    stroke-width="2.3"
-    opacity="0.78"
-  />
+  <title>太极</title>
+  <circle cx="32" cy="32" r="30" fill="#1a1a1a" />
+  <path d="M32,2 A30,30 0 0,1 32,62 A15,15 0 0,1 32,32 A15,15 0 0,0 32,2 Z" fill="#f5f5f5" />
+  <circle cx="32" cy="17" r="5" fill="#f5f5f5" />
+  <circle cx="32" cy="47" r="5" fill="#1a1a1a" />
 </svg>

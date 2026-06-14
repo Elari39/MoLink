@@ -26,7 +26,7 @@ docker compose up --build
 - 前端：http://localhost:8763
 - 后端：仅供 Docker 内网访问，不再直接暴露宿主机端口
 
-默认生成的短链域名为 `http://localhost:8763`；1Panel / 生产部署时请通过 `APP_BASE_URL` 覆盖为最终公网访问地址，例如 `http://你的域名:8763` 或反代后的 HTTPS 域名。
+默认生成的短链域名会根据当前请求自动识别，例如本地访问为 `http://localhost:8763`。1Panel / 生产部署时通常无需设置 `APP_BASE_URL`；如需固定为某个公网地址，可通过 `APP_BASE_URL` 覆盖，例如反代后的 HTTPS 域名。
 
 ## 1Panel 远程存储部署
 
@@ -42,7 +42,9 @@ docker compose -f docker-compose.1panel.yml --env-file .env.1panel up --build -d
 APP_DISPLAY_NAME="Notes of Ashen"
 WEB_PORT=8763
 APP_TIMEOUT=610000
-APP_BASE_URL=https://your-domain.example.com
+
+# 可选：留空时根据 Host / X-Forwarded-* 自动识别；需要固定短链域名时再填写。
+APP_BASE_URL=
 
 APP_REMOTE_STORAGE_ENABLED=true
 APP_DATABASE_DSN=notes_user:replace-with-db-password@tcp(mysql.example.com:3306)/notes_of_ashen?charset=utf8mb4&parseTime=true&loc=Local
@@ -55,6 +57,7 @@ APP_REDIS_DB=1
 ```
 
 - `APP_REMOTE_STORAGE_ENABLED=false` 时不启用远程存储适配，后端继续使用 `MYSQL_HOST` / `MYSQL_PORT` / `MYSQL_DB` / `MYSQL_USER` / `MYSQL_PASSWORD` 与 `REDIS_HOST` / `REDIS_PORT` / `REDIS_PASSWORD`。
+- `APP_BASE_URL` 留空时，后端会优先根据 `X-Forwarded-Proto`、`X-Forwarded-Host`、`Host` 自动生成短链域名；填写后则始终使用该固定地址。
 - `APP_DATABASE_DSN` 兼容 `user:password@tcp(host:port)/database?...` 格式，其中 `charset` 会映射为 JDBC 字符编码，`loc=Local` 会映射为 `Asia/Shanghai`，`parseTime` 对 Java/JPA 无需处理。
 - `APP_DATABASE_MAX_IDLE_CONNS` 会自动限制为不超过 `APP_DATABASE_MAX_OPEN_CONNS`。
 
