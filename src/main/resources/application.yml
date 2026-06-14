@@ -33,8 +33,8 @@ spring:
 
 # 短链服务自定义配置（绑定到 AppProperties）
 app:
-  # 生成短链时拼接的对外域名；容器/生产应改为真实域名
-  base-url: ${APP_BASE_URL:http://localhost:8080}
+  # 生成短链时拼接的对外域名；本地调试可用 APP_BASE_URL 覆盖
+  base-url: ${APP_BASE_URL:https://shorten.miku831.fun}
   # Redis 发号起始值，设为 62^3=238328 保证首批短码长度 >= 4
   seq-start: 238328
   # 短链原始地址缓存时长（分钟）

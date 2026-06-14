@@ -65,6 +65,20 @@ export function IconMoon(props: IconProps) {
   )
 }
 
+/** 语言切换 */
+export function IconLanguages(props: IconProps) {
+  return (
+    <svg {...base(props)}>
+      <path d="M4 5h7" />
+      <path d="M7.5 3v2" />
+      <path d="M9.5 5c-.8 2.8-2.7 5.2-5.5 7" />
+      <path d="M5.5 8.5c1.1 1.7 2.7 3 4.8 3.8" />
+      <path d="M13 19l4-10 4 10" />
+      <path d="M14.4 15.5h5.2" />
+    </svg>
+  )
+}
+
 /** 向下箭头（展开） */
 export function IconChevronDown(props: IconProps) {
   return (

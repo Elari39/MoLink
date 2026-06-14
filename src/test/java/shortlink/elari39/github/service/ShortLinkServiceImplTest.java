@@ -58,7 +58,7 @@ class ShortLinkServiceImplTest {
     @BeforeEach
     void setUp() {
         // baseUrl / seqStart=100000 / ttl=60 / 短码长度 4~16
-        AppProperties properties = new AppProperties("http://localhost:8080", 100000L, 60L, 4, 16);
+        AppProperties properties = new AppProperties("https://shorten.miku831.fun", 100000L, 60L, 4, 16);
         service = new ShortLinkServiceImpl(
                 shortLinkRepository, accessLogRepository, redis, clickStatService, properties);
         // 大多数用例会用到 opsForValue，统一宽松桩
@@ -76,7 +76,7 @@ class ShortLinkServiceImplTest {
 
         assertEquals(Base62.encode(100000L), resp.code());
         assertFalse(resp.custom());
-        assertEquals("http://localhost:8080/" + resp.code(), resp.shortUrl());
+        assertEquals("https://shorten.miku831.fun/" + resp.code(), resp.shortUrl());
     }
 
     @Test

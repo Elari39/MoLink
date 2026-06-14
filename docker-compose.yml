@@ -45,15 +45,15 @@ services:
       MYSQL_PASSWORD: root
       REDIS_HOST: redis
       REDIS_PORT: 6379
-      # 短链对外域名指向前端 nginx（80 端口），短码点击经 nginx 反代回后端
-      APP_BASE_URL: http://localhost
+      # 短链对外域名；1Panel/生产部署时建议覆盖为真实域名或公网 IP
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost:8763}
     depends_on:
       mysql:
         condition: service_healthy
       redis:
         condition: service_healthy
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     networks:
       - molink
 
@@ -65,7 +65,7 @@ services:
     depends_on:
       - backend
     ports:
-      - "80:80"
+      - "8763:80"
     networks:
       - molink
 

@@ -15,7 +15,7 @@
   <artifactId>short-link</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <name>short-link</name>
-  <description>墨链 MoLink 短链接服务</description>
+  <description>墨链 MoLink · elari39 的个人短链接项目</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

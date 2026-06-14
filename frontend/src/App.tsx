@@ -7,7 +7,6 @@ import { ApiDocsPage } from './pages/ApiDocsPage'
 import { FeaturesPage } from './pages/FeaturesPage'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
-import { PricingPage } from './pages/PricingPage'
 import { StatsPage } from './pages/StatsPage'
 
 /**
@@ -28,7 +27,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
           <Route path="/api-docs" element={<ApiDocsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/stats" element={<StatsPage />} />

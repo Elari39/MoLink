@@ -4,8 +4,8 @@
 
 ## 项目简介
 
-墨链 MoLink 是一个水墨风短链接服务：把长链接转为短码并支持 302 跳转、点击统计与自定义短码。
-前端为单页落地页，支持明/暗主题与中英文切换。
+墨链 MoLink 是 elari39 的个人水墨风短链接服务，线上地址为 `https://shorten.miku831.fun`：把长链接转为短码并支持 302 跳转、点击统计与自定义短码。
+前端为单页应用，支持明/暗主题与中英文切换，不提供定价页面。
 
 ## 技术栈
 
@@ -44,7 +44,7 @@ short-link/
         ├── contexts/            # ThemeProvider / I18nProvider + 上下文定义
         ├── hooks/               # useTheme / useI18n
         ├── i18n/                # zh / en 文案字典
-        ├── pages/               # Home / Features / Pricing / ApiDocs / About / Stats / NotFound
+        ├── pages/               # Home / Features / ApiDocs / About / Stats / NotFound
         ├── components/          # Navbar / HeroSection / ShortenForm / ResultCard / FeatureCards / Footer / InkBackdrop / InkSeal / icons
         └── App.tsx
 ```

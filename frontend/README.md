@@ -1,6 +1,11 @@
 # MoLink Frontend
 
-墨链前端是 React + TypeScript + Vite 单页应用，提供短链创建、统计查询、API 文档、明暗主题与中英文切换。
+墨链前端是 elari39 的个人短链接项目界面，线上地址为 https://shorten.miku831.fun。
+
+它使用 React + TypeScript + Vite 构建，提供短链创建、统计查询、API 文档、明暗主题与中英文切换。
+
+- GitHub 个人主页：https://github.com/elari39
+- 项目仓库：https://github.com/Elari39/MoLink
 
 ## 主要目录
 
@@ -17,7 +22,9 @@ pnpm install
 pnpm dev
 ```
 
-开发服务器会把 `/api` 代理到 `http://localhost:8080`。生产环境中，nginx 负责静态托管、`/api` 反代和根路径短码跳转反代。
+开发服务器会把 `/api` 代理到 `http://localhost:8080`。生产环境中，nginx 负责静态托管、`/api` 反代和根路径短码跳转反代；Docker 部署时仅前端对外暴露，后端接口不直接暴露宿主机端口。
+
+Docker 部署默认生成的短链域名为 `http://localhost:8763`；1Panel / 生产部署时请用 `APP_BASE_URL` 覆盖为真实公网地址。
 
 ## 验证
 

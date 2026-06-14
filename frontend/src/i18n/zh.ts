@@ -9,7 +9,6 @@ export const zh = {
   nav: {
     home: '首页',
     features: '功能',
-    pricing: '定价',
     api: 'API',
     stats: '统计',
     about: '关于我们',
@@ -18,7 +17,7 @@ export const zh = {
   },
   hero: {
     title: '化繁为简·链接无限',
-    subtitle: '短链接，让连接更简单、更优雅',
+    subtitle: 'elari39 的个人短链接项目，让日常分享、作品链接与临时跳转都更清爽。',
   },
   form: {
     placeholder: '请输入长链接，例如：https://www.example.com/page',
@@ -48,7 +47,7 @@ export const zh = {
   features: {
     eyebrow: '功能',
     title: '短链能力，一眼看清',
-    subtitle: '生成、跳转、缓存与统计都围绕真实使用场景设计，让链接从创建到复盘都有清楚入口。',
+    subtitle: '这个个人项目聚焦短链生成、稳定跳转、缓存加速与访问统计，让每一次分享都有清楚的去处。',
     easy: {
       title: '简单易用',
       desc1: '一键缩短链接',
@@ -80,7 +79,7 @@ export const zh = {
     loadingTitle: '正在取回统计',
     loadingDesc: '正在读取累计点击、过期状态与最近访问明细。',
     emptyTitle: '输入短码开始查询',
-    emptyDesc: '短码是短链接末尾的一段字符，例如 http://localhost:8080/molink 中的 molink。',
+    emptyDesc: '短码是短链接末尾的一段字符，例如 https://shorten.miku831.fun/molink 中的 molink。',
     errorTitle: '查询失败',
     errorFallback: '统计查询失败，请稍后重试',
     totalClicks: '总点击数',
@@ -104,38 +103,10 @@ export const zh = {
     copied: '已复制',
     copyFailed: '复制失败',
   },
-  pricing: {
-    eyebrow: '定价',
-    title: '按场景取墨',
-    subtitle: '从个人试用到团队部署，墨链保持克制的能力分层，让短链接服务清晰、可靠、易维护。',
-    plans: [
-      {
-        name: '个人',
-        badge: '入门',
-        tagline: '适合日常分享、作品集与轻量活动。',
-        features: ['基础短链生成', '自定义短码', '过期时间支持'],
-        cta: '开始缩短',
-      },
-      {
-        name: '进阶',
-        badge: '推荐',
-        tagline: '适合需要观察点击表现的增长场景。',
-        features: ['实时点击统计', '最近访问明细', 'Redis 热点缓存'],
-        cta: '体验统计能力',
-      },
-      {
-        name: '团队',
-        badge: '部署',
-        tagline: '适合私有化部署和团队内部工具链。',
-        features: ['Docker Compose 编排', 'MySQL 持久化', '环境变量配置'],
-        cta: '查看接口',
-      },
-    ],
-  },
   api: {
     eyebrow: 'API',
     title: '接口清晰，接入直接',
-    subtitle: '创建、跳转、统计各司其职。所有 /api 接口使用统一响应包装，便于前端与自动化脚本稳定处理。',
+    subtitle: '创建、跳转、统计各司其职。https://shorten.miku831.fun 对外提供短链访问，/api 接口保持统一响应包装。',
     note: '短码跳转走根路径 /{code}，不存在返回 404 页面，过期返回 410 页面；API 错误则返回统一 JSON。',
     copy: '复制',
     copied: '已复制',
@@ -152,7 +123,7 @@ export const zh = {
   about: {
     eyebrow: '关于我们',
     title: '把连接收进一笔墨里',
-    subtitle: '墨链把短链接服务做成一个安静、清楚、可部署的工具。它不追求复杂外壳，而是在生成、跳转、缓存、统计这些关键路径上保持明确边界。',
+    subtitle: '墨链是 elari39 维护的个人短链接项目，运行在 shorten.miku831.fun。它不追求复杂外壳，而是在生成、跳转、缓存、统计这些关键路径上保持明确边界。',
     points: [
       {
         title: '水墨体验',
@@ -168,7 +139,7 @@ export const zh = {
       },
       {
         title: '易于部署',
-        desc: 'Docker 编排 MySQL、Redis、后端与前端，配置经环境变量注入。',
+        desc: 'Docker 编排 MySQL、Redis、后端与前端，域名与连接信息经环境变量注入。',
       },
     ],
     metrics: [
@@ -190,7 +161,13 @@ export const zh = {
     ],
   },
   footer: {
-    copyright: '墨链 MoLink · 化繁为简，链接无限',
+    copyright: '墨链 MoLink · elari39 的个人短链接项目',
+    siteLabel: 'shorten.miku831.fun',
+    siteUrl: 'https://shorten.miku831.fun',
+    profileLabel: 'GitHub: elari39',
+    profileUrl: 'https://github.com/elari39',
+    repoLabel: 'MoLink 仓库',
+    repoUrl: 'https://github.com/Elari39/MoLink',
   },
   notFound: {
     title: '页面不见了',

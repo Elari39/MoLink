@@ -11,7 +11,6 @@ export const en: Messages = {
   nav: {
     home: 'Home',
     features: 'Features',
-    pricing: 'Pricing',
     api: 'API',
     stats: 'Stats',
     about: 'About',
@@ -20,7 +19,7 @@ export const en: Messages = {
   },
   hero: {
     title: 'Shorter Links, Wider Reach',
-    subtitle: 'Make every connection simpler and more elegant',
+    subtitle: 'A personal short-link project by elari39 for cleaner sharing, portfolio links, and quick redirects.',
   },
   form: {
     placeholder: 'Please enter a long URL, e.g. https://www.example.com/page',
@@ -50,7 +49,7 @@ export const en: Messages = {
   features: {
     eyebrow: 'Features',
     title: 'Short Link Capabilities',
-    subtitle: 'Creation, redirecting, caching, and analytics are shaped around real workflows, with clear entry points from launch to review.',
+    subtitle: 'This personal project focuses on link creation, stable redirects, cache acceleration, and access analytics.',
     easy: {
       title: 'Easy to Use',
       desc1: 'Shorten links in one click',
@@ -82,7 +81,7 @@ export const en: Messages = {
     loadingTitle: 'Loading Analytics',
     loadingDesc: 'Reading total clicks, expiration state, and recent access logs.',
     emptyTitle: 'Enter a short code to begin',
-    emptyDesc: 'The short code is the ending segment of a short URL, such as molink in http://localhost:8080/molink.',
+    emptyDesc: 'The short code is the ending segment of a short URL, such as molink in https://shorten.miku831.fun/molink.',
     errorTitle: 'Search Failed',
     errorFallback: 'Failed to load stats. Please try again later.',
     totalClicks: 'Total Clicks',
@@ -106,38 +105,10 @@ export const en: Messages = {
     copied: 'Copied',
     copyFailed: 'Copy failed',
   },
-  pricing: {
-    eyebrow: 'Pricing',
-    title: 'Plans by Use Case',
-    subtitle: 'From personal sharing to team deployment, MoLink keeps the feature tiers restrained, clear, and easy to maintain.',
-    plans: [
-      {
-        name: 'Personal',
-        badge: 'Starter',
-        tagline: 'For daily sharing, portfolios, and lightweight campaigns.',
-        features: ['Short link creation', 'Custom short codes', 'Expiration support'],
-        cta: 'Start shortening',
-      },
-      {
-        name: 'Growth',
-        badge: 'Popular',
-        tagline: 'For teams that need to understand link performance.',
-        features: ['Real-time click stats', 'Recent access logs', 'Redis hot cache'],
-        cta: 'Try analytics',
-      },
-      {
-        name: 'Team',
-        badge: 'Deploy',
-        tagline: 'For private deployment and internal workflows.',
-        features: ['Docker Compose setup', 'MySQL persistence', 'Environment config'],
-        cta: 'View API',
-      },
-    ],
-  },
   api: {
     eyebrow: 'API',
     title: 'Clear Interfaces',
-    subtitle: 'Creation, redirect, and analytics each have a clear role. Every /api endpoint uses the same response wrapper for stable frontend and script handling.',
+    subtitle: 'Creation, redirect, and analytics each have a clear role. https://shorten.miku831.fun serves public short links, while /api keeps a unified response wrapper.',
     note: 'Short-code redirects use the root path /{code}. Missing links return a 404 page, expired links return a 410 page, and API errors return JSON.',
     copy: 'Copy',
     copied: 'Copied',
@@ -154,7 +125,7 @@ export const en: Messages = {
   about: {
     eyebrow: 'About',
     title: 'A Link in One Brushstroke',
-    subtitle: 'MoLink turns short links into a quiet, clear, deployable tool. Instead of adding ceremony, it keeps generation, redirecting, caching, and analytics sharply bounded.',
+    subtitle: 'MoLink is a personal short-link project maintained by elari39 and served at shorten.miku831.fun. It keeps generation, redirects, caching, and analytics sharply bounded.',
     points: [
       {
         title: 'Ink Interface',
@@ -170,7 +141,7 @@ export const en: Messages = {
       },
       {
         title: 'Easy Deploy',
-        desc: 'Docker composes MySQL, Redis, backend, and frontend with environment-based config.',
+        desc: 'Docker composes MySQL, Redis, backend, and frontend with domain and connection settings from environment config.',
       },
     ],
     metrics: [
@@ -192,7 +163,13 @@ export const en: Messages = {
     ],
   },
   footer: {
-    copyright: 'MoLink · Make every connection simpler',
+    copyright: 'MoLink · A personal short-link project by elari39',
+    siteLabel: 'shorten.miku831.fun',
+    siteUrl: 'https://shorten.miku831.fun',
+    profileLabel: 'GitHub: elari39',
+    profileUrl: 'https://github.com/elari39',
+    repoLabel: 'MoLink repository',
+    repoUrl: 'https://github.com/Elari39/MoLink',
   },
   notFound: {
     title: 'Page Not Found',

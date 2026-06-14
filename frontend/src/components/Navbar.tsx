@@ -15,7 +15,6 @@ export function Navbar() {
   const navItems = [
     { key: 'home', label: t.nav.home, to: '/' },
     { key: 'features', label: t.nav.features, to: '/features' },
-    { key: 'pricing', label: t.nav.pricing, to: '/pricing' },
     { key: 'api', label: t.nav.api, to: '/api-docs' },
     { key: 'stats', label: t.nav.stats, to: '/stats' },
     { key: 'about', label: t.nav.about, to: '/about' },

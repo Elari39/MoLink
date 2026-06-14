@@ -93,7 +93,7 @@ export function ApiSection() {
   "message": "success",
   "data": {
     "code": "molink",
-    "shortUrl": "http://localhost:8080/molink",
+    "shortUrl": "https://shorten.miku831.fun/molink",
     "originalUrl": "https://www.example.com/page",
     "custom": true,
     "createTime": "2026-06-14T12:00:00",
@@ -107,7 +107,7 @@ export function ApiSection() {
   "message": "success",
   "data": {
     "code": "molink",
-    "shortUrl": "http://localhost:8080/molink",
+    "shortUrl": "https://shorten.miku831.fun/molink",
     "originalUrl": "https://www.example.com/page",
     "totalClicks": 128,
     "expired": false,
