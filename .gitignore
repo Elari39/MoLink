@@ -1,5 +1,6 @@
 # Local config
 src/main/resources/application-local.yml
+.env.1panel
 
 # Java / Maven
 target/
