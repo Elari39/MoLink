@@ -39,6 +39,21 @@
   --wash-strong: rgba(28, 26, 23, 0.32);
   --paper-glow: rgba(255, 250, 238, 0.72);
 
+  /*
+   * 代码面板语法高亮配色（明主题）。
+   * 代码块固定为墨色底，故此处色值仍以「墨底可读」为准，
+   * 仅相较暗主题略微收沉，使在更明亮的页面环境中不刺眼。
+   */
+  --tok-method: #c9584c;  /* 朱砂 */
+  --tok-path: #d4a85a;    /* 藤黄 */
+  --tok-key: #ede4d2;     /* 亮宣纸 */
+  --tok-string: #b0a898;  /* 淡墨 */
+  --tok-number: #c9584c;  /* 朱砂 */
+  --tok-bool: #6f9fab;    /* 青墨 */
+  --tok-punct: #7a7468;   /* 远墨 */
+  --tok-text: inherit;
+  --tok-gutter: rgba(244, 237, 224, 0.28);
+
   /* 书法/楷体标题字体栈，回退到系统衬线 */
   --font-brush: "STKaiti", "KaiTi", "Kaiti SC", "Kaiti TC", "楷体", "DFKai-SB", serif;
   --font-sans: system-ui, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
@@ -61,6 +76,20 @@
   --wash: rgba(241, 239, 232, 0.14);
   --wash-strong: rgba(241, 239, 232, 0.32);
   --paper-glow: rgba(255, 255, 255, 0.08);
+
+  /*
+   * 代码面板语法高亮配色（暗主题）。
+   * 色值在更深的代码底（#080d13）上提亮，确保对比清晰。
+   */
+  --tok-method: #e88a7e;  /* 朱砂 */
+  --tok-path: #f0c98b;    /* 藤黄 */
+  --tok-key: #f4ede0;     /* 亮宣纸 */
+  --tok-string: #c9c0ad;  /* 淡墨 */
+  --tok-number: #e88a7e;  /* 朱砂 */
+  --tok-bool: #8fb6c4;    /* 青墨 */
+  --tok-punct: #8a8474;   /* 远墨 */
+  --tok-text: inherit;
+  --tok-gutter: rgba(244, 237, 224, 0.24);
 
   color-scheme: dark;
 }
@@ -136,6 +165,19 @@ body {
     filter: saturate(1.08);
   }
 
+  /* 悬浮时叠加一层淡墨晕外发光，强化"墨溅"反馈 */
+  .ink-brush-button {
+    transition: filter 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ink-brush-button:hover {
+    filter: drop-shadow(0 6px 18px color-mix(in srgb, var(--ink) 22%, transparent));
+  }
+
+  .ink-brush-button:active {
+    transform: translateY(1px);
+  }
+
   .ink-brush-button:disabled::before {
     opacity: 0.64;
   }
@@ -159,5 +201,200 @@ body {
   .ink-code-scroll::-webkit-scrollbar-thumb {
     background: color-mix(in srgb, var(--ink) 22%, transparent);
     border-radius: 999px;
+  }
+
+  /*
+   * 代码面板语法高亮配色（墨黑底专用）。
+   * 意境：朱砂点睛（方法/数字）、淡墨成文（字符串）、
+   * 亮宣纸提字（键）、远墨成章（标点）、一抹青墨（布尔/null）。
+   * 色值随主题在 :root / .dark 中的 --tok-* 变量切换，
+   * 始终在深色代码底上保持清晰对比。
+   */
+  .tok-method { color: var(--tok-method); font-weight: 600; }
+  .tok-path   { color: var(--tok-path); }
+  .tok-key    { color: var(--tok-key); }
+  .tok-string { color: var(--tok-string); }
+  .tok-number { color: var(--tok-number); }
+  .tok-bool   { color: var(--tok-bool); }
+  .tok-punct  { color: var(--tok-punct); }
+  .tok-text   { color: var(--tok-text); }
+
+  /*
+   * 行号列：柔和远墨色，右对齐，不可选中，
+   * 与代码列同行高、同字体以保证横向对齐。
+   */
+  .tok-gutter {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    user-select: none;
+    color: var(--tok-gutter);
+    white-space: pre;
+  }
+
+  /*
+   * 输入框聚焦墨晕光环：内发光 + 外晕，颜色取墨晕变量，
+   * 与背景墨色融为一体而不喧宾夺主。
+   */
+  .ink-focus-ring {
+    transition:
+      box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ink-focus-ring:focus,
+  .ink-focus-ring:focus-within {
+    border-color: color-mix(in srgb, var(--ink) 24%, transparent);
+    box-shadow:
+      0 0 0 3px color-mix(in srgb, var(--ink) 8%, transparent),
+      0 0 18px -4px color-mix(in srgb, var(--seal) 28%, transparent);
+  }
+
+  /*
+   * 导航笔触下划线：用 ::after 伪元素 + scaleX 过渡，
+   * 原点在左中，形成"笔尖由左落下"的水墨效果。
+   * 激活态全幅；hover 时半幅（scaleX 0.5）做弱化反馈。
+   */
+  .ink-nav-link {
+    position: relative;
+    padding-bottom: 0.25rem;
+  }
+
+  .ink-nav-link::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    content: "";
+    background: currentColor;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .ink-nav-link:hover::after {
+    transform: scaleX(0.5);
+  }
+
+  .ink-nav-link.is-active::after {
+    transform: scaleX(1);
+  }
+}
+
+/*
+ * 入场与氛围动效：统一柔缓动 cubic-bezier(0.22, 1, 0.36, 1)，
+ * 位移/缩放幅度克制，确保"精细润色"而非喧宾夺主。
+ */
+@keyframes ink-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ink-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 背景雾山慢速横向漂移，仅平移 6px，形成轻微视差 */
+@keyframes ink-drift {
+  0% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(-3px);
+  }
+}
+
+/* 氛围墨点的轻微上下浮动 */
+@keyframes ink-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 墨晕圆章极轻呼吸 */
+@keyframes ink-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: ink-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-fade {
+    animation: ink-fade 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-drift {
+    animation: ink-drift 18s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: ink-float 7s ease-in-out infinite;
+  }
+
+  .animate-pulse {
+    animation: ink-pulse 6s ease-in-out infinite;
+  }
+
+  /*
+   * 滚动揭示：初始隐于下方，进入视口后由 .is-visible 触发上浮淡入。
+   * 配合 transition 而非 animation，便于 JS 单次触发后停留。
+   */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 尊重「减少动效」偏好：关闭所有非必要动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -101,7 +101,7 @@ export function ShortenForm() {
     <div className="mx-auto w-full max-w-4xl rounded-[24px] border border-card-border bg-card/75 p-4 shadow-[0_24px_70px_rgba(28,26,23,0.12)] backdrop-blur-xl dark:shadow-[0_24px_80px_rgba(0,0,0,0.32)] sm:p-6">
       <form onSubmit={handleSubmit}>
         {/* 输入 + 提交 */}
-        <div className="flex flex-col gap-3 rounded-2xl border border-card-border bg-paper/70 p-2 shadow-inner shadow-white/30 dark:bg-paper-soft/70 dark:shadow-black/20 sm:flex-row sm:items-center sm:pl-5">
+        <div className="ink-focus-ring flex flex-col gap-3 rounded-2xl border border-card-border bg-paper/70 p-2 shadow-inner shadow-white/30 dark:bg-paper-soft/70 dark:shadow-black/20 sm:flex-row sm:items-center sm:pl-5">
           <input
             type="text"
             value={url}

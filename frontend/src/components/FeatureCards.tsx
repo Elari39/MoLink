@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from 'react'
 import { useI18n } from '../hooks/useI18n'
 import { IconCustom, IconEasy, IconSafe, IconTracking } from './icons'
+import { Reveal } from './Reveal'
 
 type Feature = {
   icon: ComponentType<SVGProps<SVGSVGElement>>
@@ -11,6 +12,7 @@ type Feature = {
 
 /**
  * 四个特性：以紧凑横向条目承接首屏表单，图标使用墨晕圆章。
+ * 每张卡进入视口时错峰上浮淡入，悬浮时墨晕扩散。
  */
 export function FeatureCards() {
   const { t } = useI18n()
@@ -34,20 +36,22 @@ export function FeatureCards() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map(({ icon: Icon, title, desc1, desc2 }) => (
-          <div key={title} className="flex items-center gap-4 rounded-2xl px-2 py-2 text-left">
-            <div className="ink-wash-disc flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-ink shadow-sm">
-              <Icon className="h-6 w-6" />
+        {features.map(({ icon: Icon, title, desc1, desc2 }, index) => (
+          <Reveal key={title} delay={index * 80}>
+            <div className="group flex h-full items-center gap-4 rounded-2xl border border-transparent px-2 py-2 text-left transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--ink)_16%,transparent)] hover:bg-card/40">
+              <div className="ink-wash-disc flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-ink shadow-sm transition-transform duration-300 group-hover:scale-[1.06]">
+                <Icon className="h-6 w-6" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-brush text-lg font-bold text-ink">{title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-muted sm:text-[13px]">
+                  {desc1}
+                  <br />
+                  {desc2}
+                </p>
+              </div>
             </div>
-            <div className="min-w-0">
-              <h3 className="font-brush text-lg font-bold text-ink">{title}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-muted sm:text-[13px]">
-                {desc1}
-                <br />
-                {desc2}
-              </p>
-            </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>

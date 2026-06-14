@@ -21,8 +21,8 @@ export function Navbar() {
   ]
 
   const linkClass = (isActive: boolean) =>
-    `text-sm font-medium transition-colors hover:text-ink ${
-      isActive ? 'border-b-2 border-ink pb-1 text-ink' : 'text-ink-soft'
+    `ink-nav-link text-sm font-medium transition-colors hover:text-ink ${
+      isActive ? 'is-active text-ink' : 'text-ink-soft'
     }`
 
   return (

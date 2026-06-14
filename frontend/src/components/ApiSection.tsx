@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CodeHighlight } from './CodeHighlight'
 import { useI18n } from '../hooks/useI18n'
 import { IconCheck, IconCopy } from './icons'
 
@@ -67,7 +68,7 @@ function CodePanel({
           </button>
         </div>
         <pre className="ink-code-scroll overflow-x-auto p-4 text-left text-xs leading-6 text-paper/80">
-          <code>{code}</code>
+          <CodeHighlight code={code} />
         </pre>
       </div>
       <span className="sr-only" aria-live="polite">{copyStatusText}</span>
@@ -83,7 +84,7 @@ export function ApiSection() {
 
   const createCode = `POST /api/links
 {
-  "originalUrl": "https://www.example.com/page",
+  "originalUrl": "https://shorten.miku831.fun/page",
   "customCode": "molink",
   "expireTime": "2026-12-31T23:59:59"
 }
@@ -94,7 +95,7 @@ export function ApiSection() {
   "data": {
     "code": "molink",
     "shortUrl": "https://shorten.miku831.fun/molink",
-    "originalUrl": "https://www.example.com/page",
+    "originalUrl": "https://shorten.miku831.fun/page",
     "custom": true,
     "createTime": "2026-06-14T12:00:00",
     "expireTime": "2026-12-31T23:59:59"
@@ -108,7 +109,7 @@ export function ApiSection() {
   "data": {
     "code": "molink",
     "shortUrl": "https://shorten.miku831.fun/molink",
-    "originalUrl": "https://www.example.com/page",
+    "originalUrl": "https://shorten.miku831.fun/page",
     "totalClicks": 128,
     "expired": false,
     "recentLogs": []

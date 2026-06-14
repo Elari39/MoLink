@@ -40,7 +40,13 @@ export function ResultCard({ result }: { result: LinkResponse | null }) {
   }
 
   return (
-    <div className="rounded-2xl border border-card-border bg-paper/60 px-4 py-3.5 shadow-inner shadow-white/20 backdrop-blur dark:bg-paper-soft/70 dark:shadow-black/20 sm:px-5 sm:py-4">
+    <div
+      className={`rounded-2xl border bg-paper/60 px-4 py-3.5 shadow-inner shadow-white/20 backdrop-blur transition-all duration-300 ease-out dark:bg-paper-soft/70 dark:shadow-black/20 sm:px-5 sm:py-4 ${
+        result
+          ? 'border-card-border hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--ink)_22%,transparent)] hover:shadow-[0_10px_30px_-10px_rgba(28,26,23,0.18)]'
+          : 'border-card-border'
+      }`}
+    >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <span className="ink-wash-disc flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-ink">

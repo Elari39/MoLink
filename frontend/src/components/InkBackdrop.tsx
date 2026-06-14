@@ -55,21 +55,24 @@ export function InkBackdrop() {
           />
         </g>
 
-        {/* 雾化远山，只保留水墨层次，不绘制具象细节 */}
+        {/* 雾化远山，只保留水墨层次，不绘制具象细节；慢速漂移形成轻微视差 */}
         <path
           d="M-120 394 C 96 286 212 308 374 368 C 520 422 652 314 810 364 C 950 408 1034 330 1182 356 C 1328 382 1436 330 1560 368 L1560 900 L-120 900 Z"
-          className="fill-current opacity-[0.04] dark:opacity-[0.12]"
+          className="ink-drift fill-current opacity-[0.04] dark:opacity-[0.12]"
+          style={{ animationDelay: '0s', animationDuration: '22s' }}
         />
         <path
           d="M-120 498 C 82 410 244 448 396 492 C 568 542 706 440 884 498 C 1064 556 1198 470 1560 512 L1560 900 L-120 900 Z"
-          className="fill-current opacity-[0.065] dark:opacity-[0.18]"
+          className="ink-drift fill-current opacity-[0.065] dark:opacity-[0.18]"
+          style={{ animationDelay: '-6s', animationDuration: '26s', animationDirection: 'reverse' }}
         />
         <path
           d="M-96 438 C 126 408 304 430 490 426 C 710 422 914 394 1146 424 C 1310 445 1450 438 1538 424"
-          className="stroke-current opacity-[0.08] dark:opacity-[0.15]"
+          className="ink-drift stroke-current opacity-[0.08] dark:opacity-[0.15]"
           strokeWidth="34"
           strokeLinecap="round"
           filter="url(#ink-edge-soften)"
+          style={{ animationDelay: '-3s', animationDuration: '30s' }}
         />
 
         {/* 宣纸留白下的水气层 */}
@@ -80,6 +83,20 @@ export function InkBackdrop() {
           <path d="M228 704 C 482 676 742 684 996 710" strokeWidth="1.5" />
         </g>
       </svg>
+
+      {/* 浮动墨点（墨花）：轻微上下浮动，作为氛围粒子；暗色主题更克制 */}
+      <div className="absolute inset-0 opacity-[0.5] dark:opacity-[0.35]" aria-hidden="true">
+        <span className="ink-float absolute left-[8%] top-[18%] h-1.5 w-1.5 rounded-full bg-ink/30 dark:bg-ink/40" style={{ animationDelay: '0s', animationDuration: '7s' }} />
+        <span className="ink-float absolute left-[22%] top-[68%] h-1 w-1 rounded-full bg-ink/25 dark:bg-ink/35" style={{ animationDelay: '-2s', animationDuration: '8s' }} />
+        <span className="ink-float absolute left-[36%] top-[30%] h-[3px] w-[3px] rounded-full bg-seal/25 dark:bg-seal/30" style={{ animationDelay: '-4s', animationDuration: '9s' }} />
+        <span className="ink-float absolute left-[58%] top-[12%] h-1 w-1 rounded-full bg-ink/30 dark:bg-ink/40" style={{ animationDelay: '-1s', animationDuration: '7.5s' }} />
+        <span className="ink-float absolute left-[72%] top-[56%] h-1.5 w-1.5 rounded-full bg-ink/25 dark:bg-ink/35" style={{ animationDelay: '-3s', animationDuration: '8.5s' }} />
+        <span className="ink-float absolute left-[86%] top-[26%] h-[3px] w-[3px] rounded-full bg-ink/30 dark:bg-ink/40" style={{ animationDelay: '-5s', animationDuration: '6.5s' }} />
+        <span className="ink-float absolute left-[14%] top-[44%] h-[3px] w-[3px] rounded-full bg-ink/20 dark:bg-ink/30" style={{ animationDelay: '-2.5s', animationDuration: '9.5s' }} />
+        <span className="ink-float absolute left-[48%] top-[80%] h-1 w-1 rounded-full bg-ink/25 dark:bg-ink/35" style={{ animationDelay: '-4.5s', animationDuration: '7s' }} />
+        <span className="ink-float absolute left-[92%] top-[70%] h-1 w-1 rounded-full bg-ink/20 dark:bg-ink/30" style={{ animationDelay: '-1.5s', animationDuration: '8s' }} />
+        <span className="ink-float absolute left-[4%] top-[84%] h-[3px] w-[3px] rounded-full bg-seal/20 dark:bg-seal/25" style={{ animationDelay: '-3.5s', animationDuration: '6s' }} />
+      </div>
 
       <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-paper via-paper/78 to-transparent dark:from-paper dark:via-paper/52" />
       <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper/70 to-transparent dark:from-paper/55" />
