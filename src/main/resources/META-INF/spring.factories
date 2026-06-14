@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+shortlink.elari39.github.config.RemoteStorageEnvironmentPostProcessor

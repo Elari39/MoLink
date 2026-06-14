@@ -29,6 +29,7 @@ spring:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
       password: ${REDIS_PASSWORD:}
+      database: ${REDIS_DB:0}
       timeout: 3000ms
 
 # 短链服务自定义配置（绑定到 AppProperties）

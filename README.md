@@ -28,6 +28,36 @@ docker compose up --build
 
 默认生成的短链域名为 `http://localhost:8763`；1Panel / 生产部署时请通过 `APP_BASE_URL` 覆盖为最终公网访问地址，例如 `http://你的域名:8763` 或反代后的 HTTPS 域名。
 
+## 1Panel 远程存储部署
+
+如需在 1Panel 中使用已有的远程 MySQL / Redis，不需要启动本仓库内置的 `mysql` 和 `redis` 服务，使用专用编排即可：
+
+```bash
+docker compose -f docker-compose.1panel.yml --env-file .env.1panel up --build -d
+```
+
+可先复制 `.env.1panel.example` 为 `.env.1panel`，再替换为 1Panel 中真实的内网或受信任地址。关键变量如下：
+
+```env
+APP_DISPLAY_NAME="Notes of Ashen"
+WEB_PORT=8763
+APP_TIMEOUT=610000
+APP_BASE_URL=https://your-domain.example.com
+
+APP_REMOTE_STORAGE_ENABLED=true
+APP_DATABASE_DSN=notes_user:replace-with-db-password@tcp(mysql.example.com:3306)/notes_of_ashen?charset=utf8mb4&parseTime=true&loc=Local
+APP_DATABASE_MAX_OPEN_CONNS=20
+APP_DATABASE_MAX_IDLE_CONNS=10
+
+APP_REDIS_ADDR=redis.example.com:6379
+APP_REDIS_PASSWORD=replace-with-redis-password
+APP_REDIS_DB=1
+```
+
+- `APP_REMOTE_STORAGE_ENABLED=false` 时不启用远程存储适配，后端继续使用 `MYSQL_HOST` / `MYSQL_PORT` / `MYSQL_DB` / `MYSQL_USER` / `MYSQL_PASSWORD` 与 `REDIS_HOST` / `REDIS_PORT` / `REDIS_PASSWORD`。
+- `APP_DATABASE_DSN` 兼容 `user:password@tcp(host:port)/database?...` 格式，其中 `charset` 会映射为 JDBC 字符编码，`loc=Local` 会映射为 `Asia/Shanghai`，`parseTime` 对 Java/JPA 无需处理。
+- `APP_DATABASE_MAX_IDLE_CONNS` 会自动限制为不超过 `APP_DATABASE_MAX_OPEN_CONNS`。
+
 前端开发模式：
 
 ```bash
@@ -41,6 +71,8 @@ pnpm dev
 ```bash
 mvn spring-boot:run
 ```
+
+默认会连接 `localhost:3306` 的 MySQL（`root/root`）和 `localhost:6379` 的 Redis。若看到 `Access denied for user 'root'`，请先确认本机 MySQL 账号密码，或通过 `MYSQL_HOST` / `MYSQL_USER` / `MYSQL_PASSWORD` 覆盖；若要直接连 1Panel 远程存储，则使用上方 `APP_REMOTE_STORAGE_ENABLED=true` 的变量运行。
 
 ## 验证
 
