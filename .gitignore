@@ -1,0 +1,23 @@
+# Local config
+src/main/resources/application-local.yml
+
+# Java / Maven
+target/
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/*.local
+
+# Redis local persistence
+dump.rdb
+appendonlydir/
+
+# Logs / IDE
+logs/
+*.log
+.idea/
+.vscode/
+*.iml

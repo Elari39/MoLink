@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* 暗色模式采用 class 策略：根元素加 .dark 即生效 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * 把运行时 CSS 变量暴露为 Tailwind 颜色/字体 token，
+ * 这样 bg-paper / text-ink / font-brush 等原子类会随主题切换自动变化。
+ */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-seal: var(--seal);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-line: var(--line);
+  --color-mist: var(--mist);
+
+  --font-brush: var(--font-brush);
+  --font-sans: var(--font-sans);
+}
+
+/* 明亮主题（水墨·宣纸） */
+:root {
+  --paper: #f4f1e8;
+  --paper-soft: #ece7da;
+  --ink: #1c1a17;
+  --ink-soft: #4a463f;
+  --muted: #8a8474;
+  --seal: #a63a30;
+  --card: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(28, 26, 23, 0.08);
+  --line: rgba(28, 26, 23, 0.1);
+  --mist: rgba(255, 255, 255, 0.5);
+  --wash: rgba(28, 26, 23, 0.16);
+  --wash-strong: rgba(28, 26, 23, 0.32);
+  --paper-glow: rgba(255, 250, 238, 0.72);
+
+  /* 书法/楷体标题字体栈，回退到系统衬线 */
+  --font-brush: "STKaiti", "KaiTi", "Kaiti SC", "Kaiti TC", "楷体", "DFKai-SB", serif;
+  --font-sans: system-ui, "PingFang SC", "Microsoft YaHei", "Segoe UI", Roboto, sans-serif;
+
+  color-scheme: light;
+}
+
+/* 暗色主题（水墨·夜山） */
+.dark {
+  --paper: #14161c;
+  --paper-soft: #1b1e26;
+  --ink: #f1efe8;
+  --ink-soft: #c9c5ba;
+  --muted: #8b8678;
+  --seal: #c0524a;
+  --card: rgba(30, 33, 42, 0.6);
+  --card-border: rgba(241, 239, 232, 0.08);
+  --line: rgba(241, 239, 232, 0.1);
+  --mist: rgba(241, 239, 232, 0.08);
+  --wash: rgba(241, 239, 232, 0.14);
+  --wash-strong: rgba(241, 239, 232, 0.32);
+  --paper-glow: rgba(255, 255, 255, 0.08);
+
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--paper);
+  color: var(--ink-soft);
+  /* 主题切换时的平滑过渡 */
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--seal) 24%, transparent);
+  color: var(--ink);
+}
+
+@layer utilities {
+  .ink-brush-button {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .ink-brush-button::before {
+    position: absolute;
+    z-index: -1;
+    inset: -5px -10px;
+    content: "";
+    background:
+      radial-gradient(ellipse at 16% 42%, transparent 0 7%, var(--ink) 8% 100%),
+      radial-gradient(ellipse at 84% 58%, transparent 0 8%, var(--ink) 9% 100%),
+      var(--ink);
+    border-radius: 999px;
+    clip-path: polygon(
+      4% 28%,
+      13% 18%,
+      29% 22%,
+      43% 14%,
+      58% 22%,
+      73% 16%,
+      92% 26%,
+      97% 50%,
+      91% 75%,
+      72% 82%,
+      58% 78%,
+      44% 87%,
+      27% 78%,
+      11% 83%,
+      3% 61%
+    );
+    opacity: 0.96;
+    transition:
+      transform 0.24s ease,
+      opacity 0.24s ease,
+      filter 0.24s ease;
+  }
+
+  .ink-brush-button:hover::before {
+    transform: scale(1.03, 1.06);
+    filter: saturate(1.08);
+  }
+
+  .ink-brush-button:disabled::before {
+    opacity: 0.64;
+  }
+
+  .ink-wash-disc {
+    background:
+      radial-gradient(circle at 50% 50%, var(--paper-glow) 0 26%, transparent 27%),
+      radial-gradient(circle at 42% 45%, var(--wash-strong) 0 35%, transparent 36%),
+      radial-gradient(circle at 62% 58%, var(--wash) 0 54%, transparent 55%);
+  }
+
+  .ink-code-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--ink) 26%, transparent) transparent;
+  }
+
+  .ink-code-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .ink-code-scroll::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--ink) 22%, transparent);
+    border-radius: 999px;
+  }
+}

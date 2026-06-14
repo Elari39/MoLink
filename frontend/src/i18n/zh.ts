@@ -1,0 +1,203 @@
+/**
+ * 中文文案字典。en.ts 必须保持与本文件相同的结构。
+ */
+export const zh = {
+  brand: {
+    name: '墨链',
+    en: 'MoLink',
+  },
+  nav: {
+    home: '首页',
+    features: '功能',
+    pricing: '定价',
+    api: 'API',
+    stats: '统计',
+    about: '关于我们',
+    openMenu: '打开导航菜单',
+    closeMenu: '关闭导航菜单',
+  },
+  hero: {
+    title: '化繁为简·链接无限',
+    subtitle: '短链接，让连接更简单、更优雅',
+  },
+  form: {
+    placeholder: '请输入长链接，例如：https://www.example.com/page',
+    submit: '缩短链接',
+    submitting: '生成中…',
+    advanced: '自定义短码',
+    customPlaceholder: '自定义短码（可选，字母或数字）',
+    expireTime: '过期时间',
+    resultPlaceholder: '生成的短链接将显示在这里',
+    shortCode: '短码',
+    noExpire: '永久有效',
+    openLink: '打开',
+    viewStats: '查看统计',
+    copy: '复制',
+    copied: '已复制',
+    copyFailed: '复制失败',
+    customHint: '自定义短码需为 4~16 位字母或数字；过期时间必须晚于当前时间。',
+  },
+  errors: {
+    empty: '请输入需要缩短的链接',
+    invalidUrl: '请输入合法的 http/https 链接',
+    invalidCustomCode: '自定义短码只能包含字母和数字',
+    customCodeLength: '自定义短码长度需在 4~16 位之间',
+    expireTimePast: '过期时间必须晚于当前时间',
+    requestFailed: '生成失败，请稍后重试',
+  },
+  features: {
+    eyebrow: '功能',
+    title: '短链能力，一眼看清',
+    subtitle: '生成、跳转、缓存与统计都围绕真实使用场景设计，让链接从创建到复盘都有清楚入口。',
+    easy: {
+      title: '简单易用',
+      desc1: '一键缩短链接',
+      desc2: '快速生成短链接',
+    },
+    tracking: {
+      title: '数据追踪',
+      desc1: '实时统计分析',
+      desc2: '掌握链接动态',
+    },
+    safe: {
+      title: '安全可靠',
+      desc1: '多重安全防护',
+      desc2: '保障链接安全',
+    },
+    custom: {
+      title: '自定义',
+      desc1: '自定义短链接',
+      desc2: '打造专属品牌',
+    },
+  },
+  stats: {
+    eyebrow: '统计',
+    title: '查看短链统计',
+    subtitle: '输入短码即可查看总点击数、过期状态与最近访问明细。生成短链后也可以直接从结果进入这里。',
+    searchPlaceholder: '输入短码，例如 molink',
+    search: '查询统计',
+    loading: '查询中…',
+    loadingTitle: '正在取回统计',
+    loadingDesc: '正在读取累计点击、过期状态与最近访问明细。',
+    emptyTitle: '输入短码开始查询',
+    emptyDesc: '短码是短链接末尾的一段字符，例如 http://localhost:8080/molink 中的 molink。',
+    errorTitle: '查询失败',
+    errorFallback: '统计查询失败，请稍后重试',
+    totalClicks: '总点击数',
+    shortUrl: '短链接',
+    originalUrl: '原始链接',
+    code: '短码',
+    createdAt: '创建时间',
+    expireTime: '过期时间',
+    neverExpire: '永久有效',
+    active: '有效',
+    expired: '已过期',
+    recentLogs: '最近访问明细',
+    noLogs: '暂无访问明细',
+    ip: 'IP',
+    referer: '来源',
+    userAgent: 'User Agent',
+    direct: '直接访问',
+    unknown: '未知',
+    accessTime: '访问时间',
+    copy: '复制短链',
+    copied: '已复制',
+    copyFailed: '复制失败',
+  },
+  pricing: {
+    eyebrow: '定价',
+    title: '按场景取墨',
+    subtitle: '从个人试用到团队部署，墨链保持克制的能力分层，让短链接服务清晰、可靠、易维护。',
+    plans: [
+      {
+        name: '个人',
+        badge: '入门',
+        tagline: '适合日常分享、作品集与轻量活动。',
+        features: ['基础短链生成', '自定义短码', '过期时间支持'],
+        cta: '开始缩短',
+      },
+      {
+        name: '进阶',
+        badge: '推荐',
+        tagline: '适合需要观察点击表现的增长场景。',
+        features: ['实时点击统计', '最近访问明细', 'Redis 热点缓存'],
+        cta: '体验统计能力',
+      },
+      {
+        name: '团队',
+        badge: '部署',
+        tagline: '适合私有化部署和团队内部工具链。',
+        features: ['Docker Compose 编排', 'MySQL 持久化', '环境变量配置'],
+        cta: '查看接口',
+      },
+    ],
+  },
+  api: {
+    eyebrow: 'API',
+    title: '接口清晰，接入直接',
+    subtitle: '创建、跳转、统计各司其职。所有 /api 接口使用统一响应包装，便于前端与自动化脚本稳定处理。',
+    note: '短码跳转走根路径 /{code}，不存在返回 404 页面，过期返回 410 页面；API 错误则返回统一 JSON。',
+    copy: '复制',
+    copied: '已复制',
+    copyFailed: '复制失败',
+    create: {
+      title: '创建短链',
+      desc: '提交原始链接，可选自定义短码与过期时间，返回完整短链地址。',
+    },
+    stats: {
+      title: '查询统计',
+      desc: '按短码读取累计点击、过期状态与最近访问明细。',
+    },
+  },
+  about: {
+    eyebrow: '关于我们',
+    title: '把连接收进一笔墨里',
+    subtitle: '墨链把短链接服务做成一个安静、清楚、可部署的工具。它不追求复杂外壳，而是在生成、跳转、缓存、统计这些关键路径上保持明确边界。',
+    points: [
+      {
+        title: '水墨体验',
+        desc: '明暗主题共用同一套视觉变量，背景以代码绘制，轻量而有辨识度。',
+      },
+      {
+        title: '稳定跳转',
+        desc: '302 临时重定向保留统计能力，过期与不存在状态清晰返回。',
+      },
+      {
+        title: '实时计数',
+        desc: 'Redis 负责热点缓存与点击增量，定时回写 MySQL。',
+      },
+      {
+        title: '易于部署',
+        desc: 'Docker 编排 MySQL、Redis、后端与前端，配置经环境变量注入。',
+      },
+    ],
+    metrics: [
+      {
+        mark: '短',
+        label: '短码生成',
+        desc: 'Base62 自增序列，首码默认不少于四位。',
+      },
+      {
+        mark: '数',
+        label: '点击统计',
+        desc: '总量与最近访问明细同步展示。',
+      },
+      {
+        mark: '稳',
+        label: '缓存兜底',
+        desc: '缓存 TTL 与过期时间对齐。',
+      },
+    ],
+  },
+  footer: {
+    copyright: '墨链 MoLink · 化繁为简，链接无限',
+  },
+  notFound: {
+    title: '页面不见了',
+    desc: '这个地址没有对应的前端页面；如果它是短码，请直接访问根路径短链接。',
+    backHome: '返回首页',
+  },
+}
+
+/** 全局文案类型，以中文字典为准 */
+export type Messages = typeof zh

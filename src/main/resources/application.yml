@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: short-link
+
+  # 数据源：默认连本机 MySQL，容器中通过环境变量覆盖 host 为服务名 mysql
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:shortlink}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      # 由实体自动建表/更新表结构，适合开发与演示
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: false
+    show-sql: false
+
+  # Redis：默认连本机，容器中通过环境变量覆盖 host 为服务名 redis
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 3000ms
+
+# 短链服务自定义配置（绑定到 AppProperties）
+app:
+  # 生成短链时拼接的对外域名；容器/生产应改为真实域名
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+  # Redis 发号起始值，设为 62^3=238328 保证首批短码长度 >= 4
+  seq-start: 238328
+  # 短链原始地址缓存时长（分钟）
+  cache-ttl-minutes: 60
+  # 自定义短码长度区间
+  code-min-length: 4
+  code-max-length: 16
+  # Redis 点击计数回写数据库的间隔（毫秒）
+  flush-interval-ms: 30000
+
+logging:
+  level:
+    shortlink.elari39.github: INFO

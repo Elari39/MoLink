@@ -1,0 +1,78 @@
+# 墨链 MoLink 全栈编排：MySQL + Redis + 后端 + 前端(nginx)
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: molink-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shortlink
+      TZ: Asia/Shanghai
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - molink
+
+  redis:
+    image: redis:7-alpine
+    container_name: molink-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks:
+      - molink
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: molink-backend
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: shortlink
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      # 短链对外域名指向前端 nginx（80 端口），短码点击经 nginx 反代回后端
+      APP_BASE_URL: http://localhost
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    networks:
+      - molink
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: molink-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - molink
+
+volumes:
+  mysql-data:
+  redis-data:
+
+networks:
+  molink:
+    driver: bridge

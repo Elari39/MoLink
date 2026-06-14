@@ -1,0 +1,9 @@
+# 后端构建上下文忽略项
+target/
+frontend/
+*.iml
+.idea/
+.vscode/
+.git/
+AGENT/
+*.md
